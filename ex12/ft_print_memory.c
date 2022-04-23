@@ -6,7 +6,7 @@
 /*   By: seungjki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 17:35:46 by seungjki          #+#    #+#             */
-/*   Updated: 2022/04/23 17:37:51 by seungjki         ###   ########.fr       */
+/*   Updated: 2022/04/23 21:26:29 by seungjki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	addrspitter(void *addr, char *hex, char *mem)
 	write(1, ": ", 2);
 }
 
-char	writer(char *addr, char *hex, int i, char checker)
+void	writer(char *addr, char *hex, int i)
 {
 	char	c[2];
 
@@ -59,34 +59,25 @@ char	writer(char *addr, char *hex, int i, char checker)
 		c[1] = hex[addr[i] % 16];
 		write(1, c, 2);
 	}
-	if (addr[i] == '\0' || checker == 0)
-	{
-		checker = 0;
+	if (addr[i] == '\0')
 		write(1, "  ", 2);
-	}
-	return (checker);
 }
 
-char	asciispitter(char *addr, char *hex, char checker)
+void	asciispitter(char *addr, char *hex)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 1;
-	if (addr[0] == '\0')
-		checker = 0;
-	else
-		checker = 1;
 	while (i < 16)
 	{
-		checker = writer(addr, hex, i, checker);
+		writer(addr, hex, i);
 		if (count % 2 == 0)
 			write(1, " ", 1);
 		i ++;
 		count ++;
 	}
-	return (checker);
 }
 
 void	*ft_print_memory(void *addr, unsigned int size)
@@ -106,24 +97,22 @@ void	*ft_print_memory(void *addr, unsigned int size)
 			hex[i] = 'a' - 10 + i;
 		i++;
 	}
-	hex[17] = 1;
 	while (i - 16 <= size / 16)
 	{
 		addrspitter(addr + ((i - 16) * 16), hex, mem);
-		hex[17] = asciispitter(addr + ((i - 16) * 16), hex, hex[17]);
+		asciispitter(addr + ((i - 16) * 16), hex);
 		sentencespitter(addr + ((i - 16) * 16));
 		i++;
 	}
 	return (addr);
 }
 
-/*
+
 #include <stdio.h>
 int main(void)
 {
 
- char string[94] = "Bonjour les aminches*sc**c 
- est fou*tout*ce qu on peut faire avec***print_memory****lol*lol* *";
+ char string[94] = "Bonjour les aminches*sc**c est fou*tout*ce qu on peut faire avec***print_memory****lol*lol* *";
  string[20] = 9;
  string[23] = 10;
  string[24] = 9;
@@ -146,4 +135,4 @@ int main(void)
   printf("%p\n", string + 16 * i);
  }
 }
-*/
+

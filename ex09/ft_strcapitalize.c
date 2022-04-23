@@ -6,7 +6,7 @@
 /*   By: seungjki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:41:45 by seungjki          #+#    #+#             */
-/*   Updated: 2022/04/23 17:24:13 by seungjki         ###   ########.fr       */
+/*   Updated: 2022/04/23 19:51:15 by seungjki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ char	*ft_strcapitalize(char *str)
 	return (str);
 }
 
-/*
+
 #include<stdio.h>
 int main(void)
 {
-	char str[] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
+	char str[] = "sALUt, coMMent tu vas ? 42mots quarante-deux; cinquante+et+un";
 	printf("%s", ft_strcapitalize(str));
 }
-*/
+
